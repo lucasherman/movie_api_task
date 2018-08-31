@@ -1,0 +1,3 @@
+mvapi/__pycache__/*
+movie_api/__pycache__/*
+*.pyc
