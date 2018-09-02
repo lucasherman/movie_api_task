@@ -1,31 +1,21 @@
 from .models import Movie, Comment
-from rest_framework import status
+from rest_framework import status, generics
 from rest_framework.viewsets import ModelViewSet
-from rest_framework.views import APIView
 from rest_framework.response import Response
 from .serializers import MovieSerializer, CommentSerializer
 from .omdb_connector import retrieve_movie_data
 from django.shortcuts import get_object_or_404
+from rest_framework.filters import OrderingFilter
+from django_filters.rest_framework import DjangoFilterBackend
 
 
-class MovieViewSet(ModelViewSet):
+class MovieList(generics.ListAPIView):
 
-    queryset = Movie.objects.all().order_by('pk')
     serializer_class = MovieSerializer
-
-
-class CommentViewSet(ModelViewSet):
-
-    queryset = Comment.objects.all().order_by('pk')
-    serializer_class = CommentSerializer
-
-
-class MovieList(APIView):
-
-    def get(self, request):
-        movies = Movie.objects.all().order_by('pk')
-        movies_serialized = MovieSerializer(movies, many=True)
-        return Response(movies_serialized.data)
+    queryset = Movie.objects.all().order_by('pk')
+    filter_backends = (OrderingFilter, DjangoFilterBackend)
+    filter_fields = ('title', 'year', 'director')
+    ordering_fields = ('year', 'title')
 
     def post(self, request):
         title = request.POST.get('title')
@@ -42,15 +32,13 @@ class MovieList(APIView):
         return Response(status=status.HTTP_400_BAD_REQUEST, data="Title parameter not provided")
 
 
-class CommentList(APIView):
+class CommentList(generics.ListAPIView):
 
-    def get(self, request):
-        comments = Comment.objects.all()
-        if(request.GET.get('movie_id')):
-            comments = comments.filter(movie_id=request.GET.get('movie_id'))
-        comments.order_by('pk')
-        comments_serialized = CommentSerializer(comments, many=True)
-        return Response(comments_serialized.data)
+    serializer_class = CommentSerializer
+    queryset = Comment.objects.all().order_by('pk')
+    filter_backends = (OrderingFilter, DjangoFilterBackend)
+    filter_fields = ('movie_id', )
+    ordering_fields = ('movie_id', )
 
     def post(self, request):
         movie_id = request.POST.get('movie_id')
