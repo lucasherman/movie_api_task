@@ -1,7 +1,7 @@
 from .models import Movie, Comment
 from rest_framework import status, generics
-from rest_framework.viewsets import ModelViewSet
 from rest_framework.response import Response
+from rest_framework.views import APIView
 from .serializers import MovieSerializer, CommentSerializer
 from .omdb_connector import retrieve_movie_data
 from django.shortcuts import get_object_or_404
@@ -9,7 +9,7 @@ from rest_framework.filters import OrderingFilter
 from django_filters.rest_framework import DjangoFilterBackend
 
 
-class MovieList(generics.ListAPIView):
+class MovieList(generics.ListCreateAPIView):
 
     serializer_class = MovieSerializer
     queryset = Movie.objects.all().order_by('pk')
@@ -17,7 +17,7 @@ class MovieList(generics.ListAPIView):
     filter_fields = ('title', 'year', 'director')
     ordering_fields = ('year', 'title')
 
-    def post(self, request):
+    def post(self, request, *args, **kwargs):
         title = request.POST.get('title')
         if title:
             movie_data = retrieve_movie_data(title)
@@ -32,7 +32,7 @@ class MovieList(generics.ListAPIView):
         return Response(status=status.HTTP_400_BAD_REQUEST, data="Title parameter not provided")
 
 
-class CommentList(generics.ListAPIView):
+class CommentList(generics.ListCreateAPIView):
 
     serializer_class = CommentSerializer
     queryset = Comment.objects.all().order_by('pk')
@@ -40,9 +40,9 @@ class CommentList(generics.ListAPIView):
     filter_fields = ('movie_id', )
     ordering_fields = ('movie_id', )
 
-    def post(self, request):
+    def post(self, request, *args, **kwargs):
         movie_id = request.POST.get('movie_id')
-        if not movie_id:
+        if movie_id is None:
             return Response(status=status.HTTP_400_BAD_REQUEST, data="Movie id not provided")
 
         movie = get_object_or_404(Movie, pk=movie_id)
