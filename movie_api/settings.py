@@ -25,7 +25,7 @@ SECRET_KEY = 'lv&9*j%j6)ggv_ess$#ir=jv1xuc6=uqhog1wf%h9z^(=ku#yk'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost']
 
 
 # Application definition
@@ -125,3 +125,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+
+OMDB_API_KEY = '797d0a55'

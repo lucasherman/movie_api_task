@@ -1,20 +1,13 @@
 from django.db import models
-from datetime import datetime
-from django.core.validators import MinValueValidator, MaxValueValidator
-from django.utils import timezone
-
-YEARS = list(range(1921, (datetime.now().year+1)))
-YEAR_CHOICES = zip(map(str, YEARS), YEARS)
-
 
 
 class Movie(models.Model):
 
     title = models.CharField(max_length=250)
-    year = models.IntegerField(choices=YEAR_CHOICES, null=True)
-    rated = models.CharField(max_length=10,null=True)
-    released = models.DateField(null=True)
-    runtime = models.IntegerField(null=True)
+    year = models.CharField(max_length=4, null=True)
+    rated = models.CharField(max_length=10, null=True)
+    released = models.CharField(max_length=20, null=True)
+    runtime = models.CharField(max_length=10, null=True)
     genre = models.CharField(max_length=100, null=True)
     director = models.CharField(max_length=250, null=True)
     writer = models.CharField(max_length=250, null=True)
@@ -25,22 +18,16 @@ class Movie(models.Model):
     awards = models.TextField(null=True)
     poster = models.URLField(null=True)
     ratings = models.TextField(null=True)
-    metascore = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(100)], null=True)
-    imdbrating = models.DecimalField\
-            (
-                validators=[MinValueValidator(0.0), MaxValueValidator(10.0)],
-                null=True,
-                decimal_places=1,
-                max_digits=3
-            )
-    imdbvotes = models.IntegerField(validators=[MinValueValidator(0.0)], null=True)
-    imdbid = models.CharField(max_length=10, null=True)
+    metascore = models.CharField(max_length=10, null=True)
+    imdb_rating = models.CharField(max_length=10, null=True)
+    imdb_votes = models.CharField(max_length=10, null=True)
+    imdb_id = models.CharField(max_length=10, null=True, unique=True)
     type = models.CharField(max_length=20, null=True)
-    dvd = models.DateField(null=True)
-    boxoffice = models.CharField(max_length=10, null=True)
+    dvd = models.CharField(max_length=20, null=True)
+    box_office = models.CharField(max_length=10, null=True)
     production = models.CharField(max_length=100, null=True)
-    website = models.URLField(null=True)
-    response = models.NullBooleanField(null=True)
+    website = models.URLField(max_length=100, null=True)
+    response = models.CharField(max_length=100, null=True)
 
 
 class Comment(models.Model):
