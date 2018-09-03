@@ -24,7 +24,7 @@ class Movie(models.Model):
     imdb_id = models.CharField(max_length=10, null=True, unique=True)
     type = models.CharField(max_length=20, null=True)
     dvd = models.CharField(max_length=20, null=True)
-    box_office = models.CharField(max_length=10, null=True)
+    box_office = models.CharField(max_length=20, null=True)
     production = models.CharField(max_length=100, null=True)
     website = models.URLField(max_length=100, null=True)
     response = models.CharField(max_length=100, null=True)
@@ -34,6 +34,3 @@ class Comment(models.Model):
 
     movie = models.ForeignKey(Movie, on_delete="cascade")
     body = models.TextField(null=True)
-
-
-
