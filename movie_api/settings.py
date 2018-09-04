@@ -25,7 +25,7 @@ SECRET_KEY = 'lv&9*j%j6)ggv_ess$#ir=jv1xuc6=uqhog1wf%h9z^(=ku#yk'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', 'intense-citadel-88807.herokuapp.com']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'intense-citadel-88807.herokuapp.com']
 
 
 # Application definition
