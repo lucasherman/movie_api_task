@@ -78,11 +78,11 @@ WSGI_APPLICATION = 'movie_api.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'USER': 'root',
-        'PASSWORD': 'admin123#',
+        'ENGINE': 'django.db.backends.postgresql',
+        'USER': 'movieapi_admin',
+        'PASSWORD': 'movieapi_admin123#',
         'HOST': 'localhost',
-        'PORT': 3306,
+        'PORT': '',
         'NAME': 'movieapi',
 
     }
