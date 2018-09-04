@@ -1,0 +1,21 @@
+#STEPS to install application on a local server
+
+git clone https://github.com/lucasherman/movie_api_task
+cd movie_api_task
+
+-- unless virtualenv is already installed run the command below:
+pip install virtualenv
+
+-- then run following commands in order:
+virtualenv --python=python3.7 mvenv  #use different version of python 3 if needed
+source mvenv/bin/activate
+pip install -r requirements.txt
+
+
+-- You may now run the application on localhost by command:
+
+python manage.py runserver
+
+-- and go to localhost:8000 or 127.0.0.1:8000 in your browser
+
+-- or navigate to https://intense-citadel-88807.herokuapp.com/
