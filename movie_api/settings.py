@@ -79,11 +79,11 @@ WSGI_APPLICATION = 'movie_api.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'USER': 'movieapi_admin',
-        'PASSWORD': 'movieapi_admin123#',
-        'HOST': 'localhost',
-        'PORT': '',
-        'NAME': 'movieapi',
+        'USER': 'wpqchtrotmmtda',
+        'PASSWORD': '7af99c9de28c6644e89c78c228ccafdb2517581ee50fc23e20ff912f7654106c#',
+        'HOST': 'ec2-174-129-206-173.compute-1.amazonaws.com',
+        'PORT': '5432',
+        'NAME': 'd90ololnhb6jf6',
 
     }
 }
