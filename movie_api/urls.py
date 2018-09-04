@@ -16,8 +16,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.conf.urls import include, url
+from mvapi.views import MovieList
+from django.views.generic import RedirectView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    url(r'^$', RedirectView.as_view(url='api/movies', permanent=False), name='main'),
     url('/', include('mvapi.urls'))
 ]
