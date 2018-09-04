@@ -19,3 +19,18 @@ python manage.py runserver
 -- and go to localhost:8000 or 127.0.0.1:8000 in your browser
 
 -- or navigate to https://intense-citadel-88807.herokuapp.com/
+
+
+#API endpoints:
+
+POST https://intense-citadel-88807.herokuapp.com/api/movies/
+PARAMETERS e.g.: 'title': 'Avatar'
+
+GET https://intense-citadel-88807.herokuapp.com/api/movies/
+PARAMETERS e.g.: 'title': 'Avatar', 'year': 2018, 'director': 'Orson Welles', 'ordering' :'year'
+
+POST https://intense-citadel-88807.herokuapp.com/api/comments/
+PARAMETERS e.g.: 'movie_id': 4, 'comment_body': 'Comment to movie Avatar'
+
+GET https://intense-citadel-88807.herokuapp.com/api/comments/
+PARAMETERS e.g.: 'movie_id': 4
